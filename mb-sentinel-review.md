@@ -1,7 +1,7 @@
 ---
 title: "mb-sentinel-review"
 doc-id: "mb-5187edc1"
-updated: "2026-10-04"
+updated: "2026-10-13"
 ---
 
 # mb-sentinel-review
@@ -40,10 +40,14 @@ run as a background process.
 
 ---
 
-## Section 1 — Step-intensity table (from `sentinel-security-system-plan.md` Section 9)
+## Section 1 — Step-intensity table
 
 | Step | Scrutiny |
 |---|---|
+| 11 | High |
+| 12 | Medium |
+| 14 | Medium |
+| 15 | High |
 | 16 | Low/Medium |
 | 17 | High |
 | 19 | Medium |
@@ -59,8 +63,8 @@ run as a background process.
 | 46 | — (lessons enter GBrain) |
 
 Any step number not in this table: CLEAR, immediately, no further action.
-This is the same list already confirmed live against the real
-`triage_findings.source_step` CHECK constraint.
+This list must equal the `triage_findings.source_step` CHECK constraint in the
+PDLF ledger; a step added here is added there in the same change.
 
 ---
 
@@ -77,6 +81,30 @@ Based on the step number and the real feature/change being reviewed,
 identify which document(s) in `security-global/` apply. Use the
 step-to-question mapping already established:
 
+- Step 11 → `cloud/sec-github-repository-access-control.md`,
+  `infrastructure/sec-development-environment-credential-hygiene.md` and
+  `secrets/sec-ai-agent-secret-visibility.md`: the app repositories are
+  public, so nothing secret may enter them, and every repository's access
+  must be what it should be.
+- Step 12 → `threat-models/sec-multi-tenant-assumption-leakage.md` and
+  `principles/sec-server-side-authority.md`, plus any specific
+  `threat-models/` document matching the data the concept holds (e.g.
+  payments → `sec-payment-manipulation.md`, sign-in →
+  `sec-authentication-session.md`).
+- Step 14 → any specific `threat-models/` document matching the data and
+  capabilities the chosen scope adds, plus
+  `requirements/sec-requirements-third-party-integration.md` when the scope
+  includes an outside service. Question: does the chosen scope create data
+  or capabilities that need protection, and are they in the security
+  requirements?
+- Step 15 → `requirements/sec-requirements-architecture-review.md`, with
+  `principles/sec-explicit-responsibility-assignment.md` and
+  `principles/sec-least-privilege.md`. Question: where are the trust
+  boundaries, and is each one governed and assigned?
+- Step 16 → any specific `threat-models/` document matching the entities
+  named in `CONTEXT.md`, plus
+  `requirements/sec-requirements-data-table-creation.md`, since Step 17
+  builds the tables from this vocabulary.
 - Step 17 → `requirements/sec-requirements-data-table-creation.md`, plus
   any specific `threat-models/` document matching the actual data
   involved (e.g. payment data → `sec-payment-manipulation.md`).
