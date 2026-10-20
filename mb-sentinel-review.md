@@ -1,7 +1,7 @@
 ---
 title: "mb-sentinel-review"
 doc-id: "mb-5187edc1"
-updated: "2026-10-13"
+updated: "2026-10-20"
 ---
 
 # mb-sentinel-review
@@ -182,15 +182,16 @@ INSERT INTO triage_findings (
   ESCALATE. Confirmed, 2026-08-27 — `needs-triage` is the correct match
   for a fresh, unreviewed finding; `needs-info` is the correct match for
   insufficient evidence to decide, which is ESCALATE's own definition.
-- `severity`, `confidence`: real values, per Section 7 of
-  `sentinel-security-system-plan.md` — never a placeholder or default
-  value.
+- `severity`: `Low`, `Medium`, `High` or `Critical`; `confidence`:
+  `Low`, `Medium` or `High` — the values the ledger accepts; always a
+  real judgment, never a placeholder or default value.
 - `recommended_control`: drawn directly from the matched document's own
   Approved Pattern, not invented independently of it.
 
 STOP after writing the row. Do not proceed, do not implement, do not
-mark it resolved. Present the finding to the developer in the same
-plain format as `sentinel-security-system-plan.md` Section 7.
+mark it resolved. Present the finding to the developer in plain words, one line per
+item: step, matched document, what was found, severity, confidence,
+recommended control, and the decision needed.
 
 ### Step 8 — Learnings
 
