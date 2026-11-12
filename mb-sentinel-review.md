@@ -1,7 +1,7 @@
 ---
 title: "mb-sentinel-review"
 doc-id: "mb-5187edc1"
-updated: "2026-10-20"
+updated: "2026-11-12"
 ---
 
 # mb-sentinel-review
@@ -51,7 +51,6 @@ run as a background process.
 | 16 | Low/Medium |
 | 17 | High |
 | 19 | Medium |
-| 20 | Medium/High |
 | 21 | Medium |
 | 34 | Very High |
 | 35 | High |
@@ -108,6 +107,13 @@ step-to-question mapping already established:
 - Step 17 → `requirements/sec-requirements-data-table-creation.md`, plus
   any specific `threat-models/` document matching the actual data
   involved (e.g. payment data → `sec-payment-manipulation.md`).
+- Step 19 → `requirements/sec-requirements-server-function.md`, plus any
+  specific `threat-models/` document matching the data and capabilities
+  each ticket covers. Question: does every ticket that handles protected
+  data or a privileged action carry the security criteria that protect it?
+- Step 21 → `requirements/sec-requirements-architecture-review.md`.
+  Question: does the locked concept keep every trust boundary of the
+  reviewed plan, with nothing added that is ungoverned?
 - Step 34 → `requirements/sec-requirements-architecture-review.md`.
 - Step 35 → `requirements/sec-requirements-server-function.md`, plus any
   specific `threat-models/` document matching the feature.
